@@ -1,10 +1,10 @@
 // src/types/City.ts
-export interface User {
+export interface Member {
+	uid: string;
+	createdAt: Date;
 	firstname: string;
 	lastname: string;
-	email: string;
-	password: string;
 	membership: boolean;
-	roles: [string];
+	roles: [];
 	streak: number;
 }

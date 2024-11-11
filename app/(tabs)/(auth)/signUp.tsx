@@ -11,7 +11,7 @@ import {
 	Alert,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import writeDataToFirestore from "@/database/writeToFirestore";
+import { addMember } from "@/api/member";
 // If using Expo Router or React Navigation, import the navigation hook
 import { useNavigation } from "@react-navigation/native"; // Adjust based on your navigation library
 
@@ -51,14 +51,15 @@ export default function SignUpScreen() {
 			const user = userCredential.user;
 			console.log(user);
 
-			// Optionally, add user details to Firestore
-			writeDataToFirestore("members", {
+			// Add user details to Firestore
+			addMember({
 				uid: user.uid,
-				email: user.email,
 				createdAt: new Date(),
+				firstname: "",
+				lastname: "",
 				membership: false,
 				roles: [],
-				// Add any additional fields you need
+				streak: 0,
 			});
 
 			// TODO: Navigate to the landing page or another screen

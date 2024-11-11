@@ -5,20 +5,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
-import writeDataToFirestore from "../../database/writeToFirestore";
-
 export default function HomeScreen() {
-	const test = async () => {
-		console.log("clicked!");
-		/*
-		writeDataToFirestore("members", {
-			name: "Michelle",
-			membership: true,
-			roles: [],
-		});
-    */
-	};
-
 	return (
 		<ParallaxScrollView
 			headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -34,7 +21,6 @@ export default function HomeScreen() {
 				<HelloWave />
 			</ThemedView>
 			<ThemedView style={styles.stepContainer}>
-				<Button title="CLICK" onPress={test} />
 				<ThemedText type="subtitle">Step 1: Try it</ThemedText>
 				<ThemedText>
 					Edit{" "}
