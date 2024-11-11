@@ -11,12 +11,11 @@ import {
 	Alert,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { FIRESTORE_DB } from "../../database/firebaseConfig"; // Adjust the path as needed
-import { collection, addDoc } from "firebase/firestore";
+import writeDataToFirestore from "@/database/writeToFirestore";
 // If using Expo Router or React Navigation, import the navigation hook
 import { useNavigation } from "@react-navigation/native"; // Adjust based on your navigation library
 
-const SignUp: React.FC = () => {
+export default function SignUpScreen() {
 	const auth = getAuth();
 	const navigation = useNavigation(); // Replace with your navigation method if different
 
@@ -43,23 +42,28 @@ const SignUp: React.FC = () => {
 
 		try {
 			// Create user with email and password
+			console.log("sent!");
 			const userCredential = await createUserWithEmailAndPassword(
 				auth,
 				email,
 				password
 			);
 			const user = userCredential.user;
+			console.log(user);
 
 			// Optionally, add user details to Firestore
-			await addDoc(collection(FIRESTORE_DB, "users"), {
+			writeDataToFirestore("members", {
 				uid: user.uid,
 				email: user.email,
 				createdAt: new Date(),
+				membership: false,
+				roles: [],
 				// Add any additional fields you need
 			});
 
 			// TODO: Navigate to the landing page or another screen
 			// navigation.navigate("Landing"); // Adjust the route name as per your navigation setup
+			console.log("user added!");
 		} catch (err: any) {
 			// Handle Firebase sign-up errors
 			let errorMessage = "An error occurred during sign up.";
@@ -73,6 +77,7 @@ const SignUp: React.FC = () => {
 			setError(errorMessage);
 		} finally {
 			setLoading(false);
+			console.log("alskdjfalkdjf");
 		}
 	};
 
@@ -126,9 +131,7 @@ const SignUp: React.FC = () => {
 			</View>
 		</View>
 	);
-};
-
-export default SignUp;
+}
 
 const styles = StyleSheet.create({
 	container: {

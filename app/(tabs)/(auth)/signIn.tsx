@@ -1,5 +1,4 @@
 // app/auth/signIn.tsx
-
 import React, { useState } from "react";
 import {
 	View,
@@ -13,7 +12,7 @@ import {
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 
-const SignIn: React.FC = () => {
+export default function SignInScreen() {
 	const auth = getAuth();
 	const navigation = useNavigation(); // Adjust based on your navigation setup
 
@@ -93,9 +92,7 @@ const SignIn: React.FC = () => {
 			</View>
 		</View>
 	);
-};
-
-export default SignIn;
+}
 
 const styles = StyleSheet.create({
 	container: {
