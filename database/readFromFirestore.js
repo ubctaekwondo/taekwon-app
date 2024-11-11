@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import { FIRESTORE_DB } from "./firebaseDb";
+import { FIRESTORE_DB } from "./firebaseConfig";
 
 // Function to read data from Firestore
 const readDataFromFirestore = async (collect, docId) => {

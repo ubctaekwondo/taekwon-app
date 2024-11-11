@@ -1,5 +1,5 @@
 import { collection, addDoc } from "firebase/firestore";
-import { FIRESTORE_DB } from "./firebaseDb";
+import { FIRESTORE_DB } from "./firebaseConfig";
 
 // Function to write data to Firestore
 const writeDataToFirestore = async (collect, data) => {
