@@ -10,11 +10,13 @@ import writeDataToFirestore from "../../database/writeToFirestore";
 export default function HomeScreen() {
 	const test = async () => {
 		console.log("clicked!");
+		/*
 		writeDataToFirestore("members", {
 			name: "Michelle",
 			membership: true,
 			roles: [],
 		});
+    */
 	};
 
 	return (
