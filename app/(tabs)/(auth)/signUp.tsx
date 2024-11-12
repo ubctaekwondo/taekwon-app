@@ -78,7 +78,6 @@ export default function SignUpScreen() {
 			setError(errorMessage);
 		} finally {
 			setLoading(false);
-			console.log("alskdjfalkdjf");
 		}
 	};
 

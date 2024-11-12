@@ -1,13 +1,13 @@
-import { collection, addDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc } from "firebase/firestore";
 import { FIRESTORE_DB } from "../config/firebaseConfig";
 import { Member } from "@/types/member";
 
 const collectionName = "members";
 
 // Read member from Firestor
-export const readMember = async (docId: String) => {
-	const docRef = doc(FIRESTORE_DB, collectionName, docId);
+export const readMember = async (docId: string) => {
 	try {
+		const docRef = doc(FIRESTORE_DB, collectionName, docId);
 		const docSnap = await getDoc(docRef);
 		if (docSnap.exists()) {
 			console.log("Document data:", docSnap.data());
@@ -16,7 +16,7 @@ export const readMember = async (docId: String) => {
 			console.log("No such document!");
 		}
 	} catch (error) {
-		console.error("Error adding document: ", error);
+		console.error("Error reading document: ", error);
 	}
 };
 
