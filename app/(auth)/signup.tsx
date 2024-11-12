@@ -1,12 +1,15 @@
 import { Link } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
 
-export default function NotFoundScreen() {
+export default function SignUp() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Oops, not found.</Text>
+      <Text style={styles.text}>Sign up.</Text>
+      <Link href={"/today"} style={styles.button}>
+        Go to Today Screen.
+      </Link>
       <Link href={"/"} style={styles.button}>
-        Go to Home Screen.
+        Go to Sign in Screen.
       </Link>
     </View>
   );
