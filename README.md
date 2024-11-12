@@ -10,6 +10,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
+   or `yarn install`... I like that one better
+
 2. Start the app
 
    ```bash
@@ -24,6 +26,17 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+### Set up .env file with private information
+
+1. run the following code
+
+```bash
+npm install react-native-dotenv
+```
+
+2. create the .env file in the root directory
+3. copy and paste the .env file content
 
 ## Get a fresh project
 
