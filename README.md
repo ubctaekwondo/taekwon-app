@@ -10,6 +10,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
+   or `yarn install`... I like that one better
+
 2. Start the app
 
    ```bash
