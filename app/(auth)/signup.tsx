@@ -9,10 +9,45 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  TextInputProps,
 } from "react-native";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
 // import { createUserWithEmailAndPassword } from "firebase/auth";
+import Icon from "react-native-vector-icons/FontAwesome";
+
+interface CustomInputProps extends TextInputProps {
+  icon: string;
+}
+
+const CustomInput: React.FC<CustomInputProps> = ({
+  icon,
+  placeholder,
+  value,
+  onChangeText,
+  keyboardType,
+  secureTextEntry,
+}) => {
+  return (
+    <View style={GlobalStyles.inputContainer}>
+      <Icon
+        name={icon}
+        size={moderateScale(20)}
+        color="#838383"
+        style={GlobalStyles.icon}
+      />
+      <TextInput
+        style={GlobalStyles.input}
+        placeholder={placeholder}
+        placeholderTextColor="#838383"
+        value={value}
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+      />
+    </View>
+  );
+};
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -47,6 +82,7 @@ export default function SignUp() {
           <Image
             source={require("@/assets/images/TKDLogo.png")}
             style={styles.logo}
+            resizeMode="contain"
           ></Image>
         </View>
 
@@ -58,37 +94,37 @@ export default function SignUp() {
         </Text>
 
         <Text style={styles.boldtext}>First name</Text>
-        <TextInput
-          style={GlobalStyles.input}
+        <CustomInput
+          icon="user"
           placeholder="Enter your first name"
-          onChangeText={setFirstName}
           value={firstName}
+          onChangeText={setFirstName}
         />
 
         <Text style={styles.boldtext}>Last name</Text>
-        <TextInput
-          style={GlobalStyles.input}
+        <CustomInput
+          icon="user"
           placeholder="Enter your last name"
-          onChangeText={setLastName}
           value={lastName}
+          onChangeText={setLastName}
         />
 
         <Text style={styles.boldtext}>Email</Text>
-        <TextInput
-          style={GlobalStyles.input}
+        <CustomInput
+          icon="envelope"
           placeholder="Enter your email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
           value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
         />
 
         <Text style={styles.boldtext}>Password</Text>
-        <TextInput
-          style={[GlobalStyles.input, { marginBottom: 0 }]}
+        <CustomInput
+          icon="lock"
           placeholder="Enter your password"
-          secureTextEntry
-          onChangeText={setPassword}
           value={password}
+          onChangeText={setPassword}
+          secureTextEntry
         />
 
         <Text style={styles.graytext}>Minimum 8 characters</Text>
@@ -114,12 +150,8 @@ export default function SignUp() {
 
 const styles = StyleSheet.create({
   logo: {
-    // position: "absolute",
-    // top: scale(50),
-    // right: scale(50),
     width: scale(100),
     height: scale(100),
-    resizeMode: "contain",
   },
   graytext: {
     textAlign: "right",

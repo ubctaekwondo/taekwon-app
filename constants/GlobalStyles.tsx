@@ -29,17 +29,27 @@ const GlobalStyles = StyleSheet.create({
     textDecorationLine: "underline",
     color: "#373737",
   },
-  input: {
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: scale(1),
     borderColor: "#373737",
     borderRadius: scale(25),
-    paddingVertical: scale(8),
-    paddingHorizontal: scale(15),
-    fontSize: moderateScale(14),
     backgroundColor: "#f0eee6",
-    color: "#373737",
-    marginVertical: scale(8),
+    paddingHorizontal: scale(10),
+    marginTop: scale(4),
+    marginBottom: scale(12),
     width: "100%",
+  },
+  icon: {
+    marginRight: scale(10),
+  },
+  input: {
+    flex: 1,
+    fontSize: moderateScale(14),
+    color: "#373737",
+    paddingVertical: scale(8),
+    backgroundColor: "transparent",
   },
   signInButton: {
     backgroundColor: "#D9534F", // Button color (red in this case)
