@@ -6,7 +6,6 @@ import {
 	Button,
 	StyleSheet,
 	ActivityIndicator,
-	Alert,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
@@ -31,8 +30,8 @@ export default function Index() {
 
 		try {
 			// Firebase sign-in with email and password
-			await signInWithEmailAndPassword(auth, email, password);
-
+			const temp = await signInWithEmailAndPassword(auth, email, password);
+			console.log(temp);
 			// TODO: Navigate to the landing screen or main app screen
 			// navigation.navigate("(tabs)/today" as never); // Adjust the route name as per your setup
 		} catch (err: any) {
