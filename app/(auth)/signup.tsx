@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import {
-  Image,
+	Image,
 	View,
 	Text,
 	TextInput,
-  TextInputProps
-	Button,
-  ScrollView,
+	TextInputProps,
+	Pressable,
+	ScrollView,
 	StyleSheet,
 	ActivityIndicator,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addMember } from "@/api/member";
-// If using Expo Router or React Navigation, import the navigation hook
+import { Link } from "expo-router";
 import { useNavigation } from "@react-navigation/native"; // Adjust based on your navigation library
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
@@ -52,7 +52,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 };
 
 export default function SignUp() {
-  const auth = getAuth();
+	const auth = getAuth();
 	const navigation = useNavigation(); // Replace with your navigation method if different
 
 	const [firstName, setFirstName] = useState("");
@@ -180,13 +180,13 @@ export default function SignUp() {
 
 				<Text style={styles.graytext}>Minimum 8 characters</Text>
 
-        {loading ? (
-				<ActivityIndicator size="large" color="#0000ff" />
-			) : (
-				<Button title="Sign Up" onPress={handleSignUp} style={GlobalStyles.signInButton}>
-					<Text style={GlobalStyles.signInButtonText}>SIGN UP</Text>
-				</Button>
-			)}
+				{loading ? (
+					<ActivityIndicator size="large" color="#0000ff" />
+				) : (
+					<Pressable onPress={handleSignUp} style={GlobalStyles.signInButton}>
+						<Text style={GlobalStyles.signInButtonText}>SIGN UP</Text>
+					</Pressable>
+				)}
 
 				<Text style={[GlobalStyles.text, { textAlign: "center" }]}>
 					Already have an account?{" "}
