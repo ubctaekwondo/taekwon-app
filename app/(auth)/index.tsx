@@ -13,7 +13,7 @@ import { Link } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
 
 export default function Index() {
-  const auth = getAuth();
+	const auth = getAuth();
 	const navigation = useNavigation(); // Adjust based on your navigation setup
 
 	const [email, setEmail] = useState<string>("");
@@ -51,15 +51,12 @@ export default function Index() {
 		}
 	};
 
-  return (
-    <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.text}>Sign in.</Text>
-      <Link href={"/(tabs)/today"} style={GlobalStyles.link}>
-        Go to Today Screen.
-      </Link>
-      <Link href={"/signup"} style={GlobalStyles.link}>
-        Go to Sign up Screen.
-      </Link>
+	return (
+		<View style={GlobalStyles.container}>
+			<Text style={GlobalStyles.text}>Sign in.</Text>
+			<Link href={"/(tabs)/today"} style={GlobalStyles.link}>
+				Go to Today Screen.
+			</Link>
 
 			{error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -96,8 +93,8 @@ export default function Index() {
 					Sign Up
 				</Text>
 			</View>
-    </View>
-  );
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
