@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 interface CustomInputProps extends TextInputProps {
@@ -52,19 +51,6 @@ export default function SignUp() {
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	// const handleSignUp = async () => {
-	//   if (firstName && lastName && email && password.length >= 8) {
-	//     try {
-	//       await createUserWithEmailAndPassword(auth, email, password);
-	//       Alert.alert("Success", "Account created successfully!");
-	//     } catch (error) {
-	//       Alert.alert("Error", error.message);
-	//     }
-	//   } else {
-	//     Alert.alert("Error", "Please fill out all fields and ensure the password is at least 8 characters.");
-	//   }
-	// };
 
 	return (
 		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -126,10 +112,6 @@ export default function SignUp() {
 				/>
 
 				<Text style={styles.graytext}>Minimum 8 characters</Text>
-
-				{/* <TouchableOpacity onPress={handleSignUp} style={GlobalStyles.button}>
-        <Text style={GlobalStyles.buttonText}>SIGN UP</Text>
-      </TouchableOpacity> */}
 
 				<Link href={"/today"} style={GlobalStyles.signInButton}>
 					<Text style={GlobalStyles.signInButtonText}>SIGN UP</Text>
