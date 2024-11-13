@@ -26,18 +26,18 @@ export default function RootLayout() {
 
 	if (!user) {
 		return (
-			<Stack>
-				<Stack.Screen name="(auth)" options={{ headerShown: false }} />
-				<Stack.Screen name="+not-found" options={{ headerShown: false }} />
+			<Stack screenOptions={{ headerShown: false }}>
+				<Stack.Screen name="(auth)"/>
+				<Stack.Screen name="+not-found"/>
 			</Stack>
 		);
 	}
 
 	return (
-		<Stack>
-			<Stack.Screen name="(admin)" options={{ headerShown: false }} />
-			<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-			<Stack.Screen name="+not-found" options={{ headerShown: false }} />
+		<Stack screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="(admin)" />
+			<Stack.Screen name="(tabs)" />
+			<Stack.Screen name="+not-found" />
 		</Stack>
 	);
 }
