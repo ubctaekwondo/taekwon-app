@@ -1,21 +1,12 @@
 import { Text, View, StyleSheet } from "react-native";
+import GlobalStyles from "@/constants/GlobalStyles";
 
 export default function Membership() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Membership.</Text>
+    <View style={GlobalStyles.container}>
+      <Text style={GlobalStyles.text}>Membership.</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#25292e",
-  },
-  text: {
-    color: "white",
-  },
-});
+const styles = StyleSheet.create({});
