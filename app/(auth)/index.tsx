@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -41,7 +41,9 @@ export default function Index() {
 			const temp = await signInWithEmailAndPassword(auth, email, password);
 			console.log(temp);
 			// TODO: Navigate to the landing screen or main app screen
-			// navigation.navigate("(tabs)/today" as never); // Adjust the route name as per your setup
+			router.push({
+				pathname: "/(tabs)/today",
+			});
 		} catch (err: any) {
 			let errorMessage = "An error occurred during sign-in.";
 			if (err.code === "auth/user-not-found") {
