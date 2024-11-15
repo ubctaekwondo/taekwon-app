@@ -22,14 +22,6 @@ export default function RootLayout() {
 
 	if (initializing) return null;
 
-	if (!user) {
-		return (
-			<Stack screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="(auth)" />
-				<Stack.Screen name="+not-found" />
-			</Stack>
-		);
-	}
 	return (
 		<Stack screenOptions={{ headerShown: false }}>
 			{user ? (
