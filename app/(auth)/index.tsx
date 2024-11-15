@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import {
+  Image,
 	View,
 	Text,
 	TextInput,
-	Button,
+	Pressable,
 	StyleSheet,
+  ScrollView,
+  TextInputProps,
 	ActivityIndicator,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { Link } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
+import { moderateScale, scale } from "react-native-size-matters";
+import Icon from "react-native-vector-icons/FontAwesome";
+import CustomInput from "@/components/CustomInput";
 
 export default function Index() {
 	const auth = getAuth();
@@ -52,86 +58,60 @@ export default function Index() {
 	};
 
 	return (
-		<View style={GlobalStyles.container}>
-			<Text style={GlobalStyles.text}>Sign in.</Text>
-			<Link href={"/(tabs)/today"} style={GlobalStyles.link}>
-				Go to Today Screen.
-			</Link>
+		 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={GlobalStyles.container}>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-			{error ? <Text style={styles.errorText}>{error}</Text> : null}
+        <Image
+          source={require("@/assets/images/TKDLogo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        ></Image>
+        <Text style={styles.boldtext}>Email</Text>
+        <CustomInput
+          icon="envelope"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
 
-			<TextInput
-				style={styles.input}
-				placeholder="Email"
-				value={email}
-				onChangeText={setEmail}
-				keyboardType="email-address"
-				autoCapitalize="none"
-			/>
-
-			<TextInput
-				style={styles.input}
-				placeholder="Password"
-				value={password}
-				onChangeText={setPassword}
-				secureTextEntry
-				autoCapitalize="none"
-			/>
+        <Text style={styles.boldtext}>Password</Text>
+        <CustomInput
+          icon="lock"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
 			{loading ? (
-				<ActivityIndicator size="large" color="#0000ff" />
+				<
+        ActivityIndicator
+        size="large" color="#0000ff" />
 			) : (
 				<Button title="Sign In" onPress={handleSignIn} />
 			)}
 
-			<View style={styles.signUpLink}>
-				<Text>Don't have an account?</Text>
-				<Text
-					style={styles.linkText}
-					onPress={() => navigation.navigate("signup" as never)} // Adjust the route name
-				>
-					Sign Up
-				</Text>
-			</View>
-		</View>
+			 <Text style={[GlobalStyles.text, { textAlign: "center" }]}>
+          Don't have an account?{" "}
+          <Link href={"/signup"} style={GlobalStyles.link}>
+            Sign up.
+          </Link>
+        </Text>
+      </View>
+    </ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-		justifyContent: "center",
-		backgroundColor: "#fff",
-	},
-	title: {
-		fontSize: 32,
-		marginBottom: 20,
-		textAlign: "center",
-		fontWeight: "bold",
-	},
-	input: {
-		height: 50,
-		borderColor: "#ccc",
-		borderWidth: 1,
-		borderRadius: 8,
-		paddingHorizontal: 15,
-		marginBottom: 15,
-		fontSize: 16,
-	},
-	errorText: {
-		color: "red",
-		marginBottom: 15,
-		textAlign: "center",
-	},
-	signUpLink: {
-		flexDirection: "row",
-		justifyContent: "center",
-		marginTop: 20,
-	},
-	linkText: {
-		color: "#1E90FF",
-		marginLeft: 5,
-		fontWeight: "bold",
-	},
+  logo: {
+    width: scale(290),
+    height: scale(290),
+    marginBottom: scale(20),
+  },
+  boldtext: {
+    ...GlobalStyles.text,
+    fontWeight: "bold",
+  },
 });
