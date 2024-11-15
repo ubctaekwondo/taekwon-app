@@ -1,7 +1,6 @@
 import { Stack } from "expo-router";
 import { LogBox } from "react-native";
 import { useEffect, useState } from "react";
-// import { FIREBASE_AUTH } from "@/config/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 LogBox.ignoreAllLogs(true);
@@ -13,9 +12,8 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currUser: any) => {
-			console.log("onAuthStateChanged", user);
+			console.log("auth state changed");
 			setUser(currUser);
-			console.log(currUser);
 			if (initializing) setInitializing(false);
 		});
 

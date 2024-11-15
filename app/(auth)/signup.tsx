@@ -3,8 +3,6 @@ import {
 	Image,
 	View,
 	Text,
-	TextInput,
-	TextInputProps,
 	Pressable,
 	ScrollView,
 	StyleSheet,
@@ -15,7 +13,6 @@ import { addMember } from "@/api/member";
 import { Link, router } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
-import Icon from "react-native-vector-icons/FontAwesome";
 import CustomInput from "@/components/CustomInput";
 
 export default function SignUp() {
@@ -46,7 +43,7 @@ export default function SignUp() {
 				password
 			);
 			const user = userCredential.user;
-			console.log("user:", user);
+			console.log("user created in firebase auth");
 
 			// Add user details to Firestore
 			addMember({
@@ -59,8 +56,8 @@ export default function SignUp() {
 				roles: [],
 				streak: 0,
 			});
+			console.log("user added to member collection");
 
-			console.log("user added!");
 			router.push({
 				pathname: "/(tabs)/today",
 			});
@@ -145,7 +142,7 @@ export default function SignUp() {
 					secureTextEntry
 				/>
 
-				<Text style={styles.graytext}>Minimum 8 characters</Text>
+				<Text style={styles.graytext}>Minimum 6 characters</Text>
 
 				{loading ? (
 					<ActivityIndicator size="large" color="#0000ff" />

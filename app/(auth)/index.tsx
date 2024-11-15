@@ -7,15 +7,13 @@ import {
 	Pressable,
 	StyleSheet,
 	ScrollView,
-	TextInputProps,
 	ActivityIndicator,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { Link, router } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
-import { moderateScale, scale } from "react-native-size-matters";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { scale } from "react-native-size-matters";
 import CustomInput from "@/components/CustomInput";
 
 export default function Index() {
@@ -38,9 +36,10 @@ export default function Index() {
 
 		try {
 			// Firebase sign-in with email and password
-			const temp = await signInWithEmailAndPassword(auth, email, password);
-			console.log(temp);
-			// TODO: Navigate to the landing screen or main app screen
+			await signInWithEmailAndPassword(auth, email, password);
+			console.log("signed in");
+
+			// Navigate to the landing screen or main app screen
 			router.push({
 				pathname: "/(tabs)/today",
 			});
