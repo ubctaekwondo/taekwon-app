@@ -13,7 +13,6 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addMember } from "@/api/member";
 import { Link } from "expo-router";
-import { useNavigation } from "@react-navigation/native"; // Adjust based on your navigation library
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -53,25 +52,18 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
 export default function SignUp() {
 	const auth = getAuth();
-	const navigation = useNavigation(); // Replace with your navigation method if different
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
 
 	const handleSignUp = async () => {
 		// Basic validation
-		if (!email || !password || !confirmPassword) {
+		if (!email || !password) {
 			setError("All fields are required.");
-			return;
-		}
-
-		if (password !== confirmPassword) {
-			setError("Passwords do not match.");
 			return;
 		}
 
@@ -80,28 +72,26 @@ export default function SignUp() {
 
 		try {
 			// Create user with email and password
-			console.log("sent!");
 			const userCredential = await createUserWithEmailAndPassword(
 				auth,
 				email,
 				password
 			);
 			const user = userCredential.user;
-			console.log(user);
+			console.log("user:", user);
 
 			// Add user details to Firestore
 			addMember({
 				uid: user.uid,
 				createdAt: new Date(),
-				firstname: "",
-				lastname: "",
+				email: email,
+				firstname: firstName,
+				lastname: lastName,
 				membership: false,
 				roles: [],
 				streak: 0,
 			});
 
-			// TODO: Navigate to the landing page or another screen
-			// navigation.navigate("Landing"); // Adjust the route name as per your navigation setup
 			console.log("user added!");
 		} catch (err: any) {
 			// Handle Firebase sign-up errors
