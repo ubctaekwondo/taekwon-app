@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
-  Image,
+	Image,
 	View,
 	Text,
 	TextInput,
 	Pressable,
 	StyleSheet,
-  ScrollView,
-  TextInputProps,
+	ScrollView,
+	TextInputProps,
 	ActivityIndicator,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -58,60 +58,60 @@ export default function Index() {
 	};
 
 	return (
-		 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={GlobalStyles.container}>
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+			<View style={GlobalStyles.container}>
+				{error ? <Text>{error}</Text> : null}
 
-        <Image
-          source={require("@/assets/images/TKDLogo.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        ></Image>
-        <Text style={styles.boldtext}>Email</Text>
-        <CustomInput
-          icon="envelope"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
+				<Image
+					source={require("@/assets/images/TKDLogo.png")}
+					style={styles.logo}
+					resizeMode="contain"
+				></Image>
+				<Text style={styles.boldtext}>Email</Text>
+				<CustomInput
+					icon="envelope"
+					placeholder="Enter your email"
+					value={email}
+					onChangeText={setEmail}
+					keyboardType="email-address"
+				/>
 
-        <Text style={styles.boldtext}>Password</Text>
-        <CustomInput
-          icon="lock"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+				<Text style={styles.boldtext}>Password</Text>
+				<CustomInput
+					icon="lock"
+					placeholder="Enter your password"
+					value={password}
+					onChangeText={setPassword}
+					secureTextEntry
+				/>
 
-			{loading ? (
-				<
-        ActivityIndicator
-        size="large" color="#0000ff" />
-			) : (
-				<Button title="Sign In" onPress={handleSignIn} />
-			)}
+				{loading ? (
+					<ActivityIndicator size="large" color="#0000ff" />
+				) : (
+					<Pressable onPress={handleSignIn} style={GlobalStyles.signInButton}>
+						<Text style={GlobalStyles.signInButtonText}>SIGN IN</Text>
+					</Pressable>
+				)}
 
-			 <Text style={[GlobalStyles.text, { textAlign: "center" }]}>
-          Don't have an account?{" "}
-          <Link href={"/signup"} style={GlobalStyles.link}>
-            Sign up.
-          </Link>
-        </Text>
-      </View>
-    </ScrollView>
+				<Text style={[GlobalStyles.text, { textAlign: "center" }]}>
+					Don't have an account?{" "}
+					<Link href={"/signup"} style={GlobalStyles.link}>
+						Sign up.
+					</Link>
+				</Text>
+			</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-  logo: {
-    width: scale(290),
-    height: scale(290),
-    marginBottom: scale(20),
-  },
-  boldtext: {
-    ...GlobalStyles.text,
-    fontWeight: "bold",
-  },
+	logo: {
+		width: scale(290),
+		height: scale(290),
+		marginBottom: scale(20),
+	},
+	boldtext: {
+		...GlobalStyles.text,
+		fontWeight: "bold",
+	},
 });
