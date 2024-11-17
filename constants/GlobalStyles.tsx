@@ -13,29 +13,29 @@ const GlobalStyles = StyleSheet.create({
   },
   text: {
     fontSize: moderateScale(12),
-    color: "#373737",
+    color: colors.tkdgray,
     textAlign: "left",
     width: "100%",
   },
   title: {
     fontSize: moderateScale(48),
     fontWeight: "bold",
-    color: "#373737",
+    color: colors.tkdgray,
     alignSelf: "flex-start",
     textAlign: "left",
   },
   link: {
     fontSize: moderateScale(12),
     textDecorationLine: "underline",
-    color: "#373737",
+    color: colors.tkdgray,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
     borderWidth: scale(1),
-    borderColor: "#373737",
+    borderColor: colors.tkdgray,
     borderRadius: scale(24),
-    backgroundColor: "#f0eee6",
+    backgroundColor: colors.tkdwhite,
     paddingHorizontal: scale(12),
     marginTop: scale(4),
     marginBottom: scale(8),
@@ -47,7 +47,7 @@ const GlobalStyles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: moderateScale(12),
-    color: "#373737",
+    color: colors.tkdgray,
     paddingVertical: scale(8),
     backgroundColor: "transparent",
   },
@@ -62,6 +62,50 @@ const GlobalStyles = StyleSheet.create({
   signInButtonText: {
     color: "#fff", // White text color
     fontSize: moderateScale(12), // Font size
+  },
+  roundEdgeContainer: {
+    backgroundColor: colors.tkdbeige, // Light beige background
+    borderRadius: scale(28), // Rounded edges
+    paddingVertical: scale(15), // Space inside the container
+    paddingHorizontal: scale(28), // Padding for content
+    marginVertical: scale(10), // Space between sections
+    width: "112%", // Full width matching the design
+    alignSelf: "center", // Center the container
+    alignItems: "center", // Center text inside the container
+  },
+  roundEdgeSubtitle: {
+    fontSize: moderateScale(24),
+    color: colors.tkdnavy,
+    fontWeight: "bold",
+    textAlign: "right",
+  },
+  roundEdgeTitle: {
+    fontSize: moderateScale(40),
+    color: colors.tkdnavy,
+    fontWeight: "bold",
+    width: "100%",
+    textAlign: "left",
+  },
+  roundEdgeSmallSubtitle: {
+    fontSize: moderateScale(16),
+    fontWeight: "bold",
+    color: colors.tkdgray, // Title color
+  },
+  bubbleContainer: {
+    backgroundColor: colors.tkdgray, // Dark gray bubble background
+    borderRadius: scale(16), // Rounded edges
+    paddingHorizontal: scale(16), // Horizontal padding inside the bubble
+    paddingVertical: scale(4), // Vertical padding inside the bubble
+    marginTop: scale(5), // Add spacing to the top of the bubble
+    alignItems: "center",
+  },
+  bubbleText: {
+    color: colors.tkdwhite, // White text color
+    fontSize: moderateScale(12), // Text size
+  },
+  textWithIcon: {
+    flexDirection: "row", // Arrange text and icon in a row
+    alignItems: "center", // Align icon and text vertically
   },
 });
 
