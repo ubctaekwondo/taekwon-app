@@ -1,8 +1,10 @@
 const colors = {
   tkdgray: "#373737",
   tkdbeige: "#e0ddcf",
-  tkdblue: "2ea7f2",
-  tkdred: "c3423f",
+  tkdblue: "#50B8F8",
+  tkdred: "#C3423F",
+  tkdnavy: "#093C5C",
+  tkdwhite: "#f0eee6",
 };
 
 export default colors;
