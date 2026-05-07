@@ -1,10 +1,10 @@
 import { Link } from "expo-router";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import GlobalStyles from "@/constants/GlobalStyles";
 
 export default function AdminPanel() {
   return (
-    <View style={GlobalStyles.container}>
+    <ScrollView contentContainerStyle={GlobalStyles.container}>
       <Text style={GlobalStyles.text}>Admin Panel.</Text>
       <Link href={"/(admin)/manageSchedule"} style={GlobalStyles.link}>
         Go to Schedule management Screen.
@@ -18,7 +18,7 @@ export default function AdminPanel() {
       <Link href={"/(admin)/manageMembership"} style={GlobalStyles.link}>
         Go to Membership management Screen.
       </Link>
-    </View>
+    </ScrollView>
   );
 }
 

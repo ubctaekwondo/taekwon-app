@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Link } from "expo-router";
 import {
 	Text,
@@ -6,14 +7,36 @@ import {
 	TouchableOpacity,
 	Linking,
 	ScrollView,
+	ActivityIndicator,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import GlobalStyles from "@/constants/GlobalStyles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { moderateScale, scale } from "react-native-size-matters";
 import colors from "@/constants/TKDColors";
 import ClassCard from "@/components/ClassCard";
+import { getNextClass } from "@/api/classes";
+import { ClassEvent } from "@/types/classEvent";
 
 export default function Today() {
+	const [nextClass, setNextClass] = useState<ClassEvent | null>(null);
+	const [loadingClass, setLoadingClass] = useState(true);
+	const [classError, setClassError] = useState<string | null>(null);
+
+	const loadNextClass = async () => {
+		setLoadingClass(true);
+		setClassError(null);
+		try {
+			const upcomingClass = await getNextClass();
+			setNextClass(upcomingClass);
+		} catch {
+			setClassError("Could not load class info.");
+			setNextClass(null);
+		} finally {
+			setLoadingClass(false);
+		}
+	};
+
 	const handlePress = () => {
 		Linking.openURL(
 			"https://linktr.ee/ubctaekwondo?fbclid=PAZXh0bgNhZW0CMTEAAaYC2nAWj5pQQvvXyvciwNcB6oC-5mA78UGkXD8SBOSucHjXxfpQ8MpxVZs_aem_nzbv5cSTneCPzFpYcE3Edw"
@@ -30,6 +53,29 @@ export default function Today() {
 
 		return pstFormatter.format(new Date()); // Format the current date
 	};
+
+	useFocusEffect(
+		useCallback(() => {
+		loadNextClass();
+		}, [])
+	);
+
+	const formatDayLabel = (date: Date) =>
+		new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+
+	const formatDateLabel = (date: Date) =>
+		new Intl.DateTimeFormat("en-US", {
+			day: "numeric",
+			month: "short",
+		})
+			.format(date)
+			.toUpperCase();
+
+	const formatTimeLabel = (date: Date) =>
+		new Intl.DateTimeFormat("en-US", {
+			hour: "numeric",
+			minute: "2-digit",
+		}).format(date);
 
 	return (
 		<ScrollView contentContainerStyle={GlobalStyles.container}>
@@ -76,15 +122,29 @@ export default function Today() {
 					</TouchableOpacity>
 				</View>
 
-				<ClassCard
-					dayOfWeek="Wednesday"
-					date="13 NOV"
-					title="POOMSAE CLASS"
-					location="Great Hall North"
-					startTime="5:00 PM"
-					endTime="7:00 PM"
-					backgroundColor={colors.tkdblue}
-				/>
+				{loadingClass ? (
+					<View style={styles.classStateContainer}>
+						<ActivityIndicator size="small" color={colors.tkdnavy} />
+					</View>
+				) : classError ? (
+					<View style={styles.classStateContainer}>
+						<Text style={GlobalStyles.text}>{classError}</Text>
+					</View>
+				) : nextClass ? (
+					<ClassCard
+						dayOfWeek={formatDayLabel(nextClass.startAt)}
+						date={formatDateLabel(nextClass.startAt)}
+						title={nextClass.title}
+						location={nextClass.location}
+						startTime={formatTimeLabel(nextClass.startAt)}
+						endTime={formatTimeLabel(nextClass.endAt)}
+						backgroundColor={colors.tkdblue}
+					/>
+				) : (
+					<View style={styles.classStateContainer}>
+						<Text style={GlobalStyles.text}>No upcoming classes found.</Text>
+					</View>
+				)}
 
 				<View style={GlobalStyles.roundEdgeContainer}>
 					<Text style={GlobalStyles.roundEdgeTitle}>SPONSOR PERKS</Text>
@@ -128,6 +188,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		width: "100%",
+		alignItems: "center",
+	},
+	classStateContainer: {
+		width: "100%",
+		paddingVertical: scale(24),
 		alignItems: "center",
 	},
 });

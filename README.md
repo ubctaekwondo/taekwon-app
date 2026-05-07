@@ -27,16 +27,11 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-### Set up .env file with private information
+### Set up .env file
 
-1. run the following code
-
-```bash
-npm install react-native-dotenv
-```
-
-2. create the .env file in the root directory
-3. copy and paste the .env file content
+1. Create a `.env` file in the project root.
+2. Add Expo public environment variables using the `EXPO_PUBLIC_` prefix.
+3. Access values in code with `process.env.EXPO_PUBLIC_*` (for example, `process.env.EXPO_PUBLIC_API_KEY`).
 
 ## Get a fresh project
 

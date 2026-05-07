@@ -8,16 +8,15 @@ import {
 	StyleSheet,
 	ActivityIndicator,
 } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addMember } from "@/api/member";
 import { Link, router } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { moderateScale, scale } from "react-native-size-matters";
 import CustomInput from "@/components/CustomInput";
+import { getFirebaseAuth } from "@/config/firebaseConfig";
 
 export default function SignUp() {
-	const auth = getAuth();
-
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -38,7 +37,7 @@ export default function SignUp() {
 		try {
 			// Create user with email and password
 			const userCredential = await createUserWithEmailAndPassword(
-				auth,
+				getFirebaseAuth(),
 				email,
 				password
 			);

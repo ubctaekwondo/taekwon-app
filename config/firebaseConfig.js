@@ -3,7 +3,7 @@
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app";
 import { initializeFirestore } from "firebase/firestore";
-import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import * as FirebaseAuth from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,6 +25,23 @@ export const FIRESTORE_DB = initializeFirestore(FIREBASE_APP, {
   experimentalForceLongPolling: true,
   useFetchStreams: false,
 });
-export const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
+
+let firebaseAuthInstance;
+
+// Lazily initialize auth to avoid crashing at module-evaluation time.
+// This keeps Expo Router route registration stable even if auth setup fails.
+export const getFirebaseAuth = () => {
+  if (firebaseAuthInstance) return firebaseAuthInstance;
+
+  try {
+    firebaseAuthInstance = FirebaseAuth.initializeAuth(FIREBASE_APP, {
+      persistence: FirebaseAuth.getReactNativePersistence(
+        ReactNativeAsyncStorage
+      ),
+    });
+  } catch {
+    firebaseAuthInstance = FirebaseAuth.getAuth(FIREBASE_APP);
+  }
+
+  return firebaseAuthInstance;
+};

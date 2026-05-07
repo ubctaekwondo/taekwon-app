@@ -3,23 +3,19 @@ import {
 	Image,
 	View,
 	Text,
-	TextInput,
 	Pressable,
 	StyleSheet,
 	ScrollView,
 	ActivityIndicator,
 } from "react-native";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, router } from "expo-router";
 import GlobalStyles from "@/constants/GlobalStyles";
 import { scale } from "react-native-size-matters";
 import CustomInput from "@/components/CustomInput";
+import { getFirebaseAuth } from "@/config/firebaseConfig";
 
 export default function Index() {
-	const auth = getAuth();
-	const navigation = useNavigation(); // Adjust based on your navigation setup
-
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
@@ -36,7 +32,7 @@ export default function Index() {
 
 		try {
 			// Firebase sign-in with email and password
-			await signInWithEmailAndPassword(auth, email, password);
+			await signInWithEmailAndPassword(getFirebaseAuth(), email, password);
 			console.log("signed in");
 
 			// Navigate to the landing screen or main app screen
